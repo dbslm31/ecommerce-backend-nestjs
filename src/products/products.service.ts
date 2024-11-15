@@ -41,6 +41,11 @@ export class ProductsService {
     async findOne(id: number): Promise<Product | null> {
         try {
             const product = await this.productRepository.findOne(id);
+
+            if (!product) {
+                throw new NotFoundException(`Produit avec l'ID ${id} non trouvé`);
+            }
+
             return product;
         } catch (error) {
             console.error(`Error while fetching product with id ${id}:`, error);
@@ -66,7 +71,7 @@ export class ProductsService {
             if (product) {
                 await product.destroy();
             } else {
-                throw new Error(`There no product with id ${id}`);
+                throw new NotFoundException(`There no product with id ${id}`);
             }
         } catch (error) {
             console.error(`Error while deleting product with id ${id}:`, error);
