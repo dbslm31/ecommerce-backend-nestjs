@@ -3,11 +3,11 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Product } from 'src/models/product.model';
 
 @Injectable()
-export class ProductRepository {
+export class ProductsRepository {
     constructor(@InjectModel(Product) private productModel: typeof Product) { }
 
 
-    async create(data: { username: string; email: string; password: string }): Promise<Product> {
+    async create(data: { name: string, description: string, price: number, stock: number, img_url: string, is_active: boolean }): Promise<Product> {
         return this.productModel.create(data);
     }
 
