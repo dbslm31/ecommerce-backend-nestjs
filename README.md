@@ -1,6 +1,6 @@
-# User Management System
+# Ecommerce Backend
 
-This project is a user management mini application built with Nest.js, TypeScript, and MySQL (using Sequelize as ORM). It allows for user management, role handling, and secure authentication using JSON Web Tokens (JWT).
+This project is an ecommerce application built with Nest.js, TypeScript, and MySQL (using Sequelize as ORM). It allows for user management, role handling, and secure authentication using JSON Web Tokens (JWT).
 
 ## Table of Contents
 
