@@ -10,6 +10,8 @@ import { ProductsModule } from './products/products.module';
 import { Product } from './models/product.model';
 import { User } from './user/user.model';
 import { Role } from './roles/roles.model';
+import { Category } from './models/category.model';
+import { CategoriesModule } from './categories/categories.module';
 
 
 
@@ -28,10 +30,10 @@ import { Role } from './roles/roles.model';
     database: process.env.DB_NAME,
     autoLoadModels: true,
     synchronize: true,
-    models: [User, Role, Product]
+    models: [User, Role, Product, Category]
 
   }),
-    UserModule, AuthModule, RolesModule, ProductsModule],
+    UserModule, AuthModule, RolesModule, ProductsModule, CategoriesModule],
   controllers: [AppController],
   providers: [AppService],
 })
