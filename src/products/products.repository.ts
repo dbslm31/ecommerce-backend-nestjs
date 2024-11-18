@@ -11,12 +11,6 @@ export class ProductsRepository {
         return this.productModel.create(data);
     }
 
-
-    async findByEmail(email: string, options?: any): Promise<Product | null> {
-        return this.productModel.findOne({ where: { email }, ...options });
-    }
-
-
     async findAll(): Promise<Product[]> {
         return this.productModel.findAll();
     }

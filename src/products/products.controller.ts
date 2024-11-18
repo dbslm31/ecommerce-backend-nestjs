@@ -29,7 +29,7 @@ export class ProductsController {
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Put(':id')
     @Roles('admin')
-    async updateUser(@Param('id') id: number, @Body() data: Partial<Product>): Promise<void> {
+    async updateProduct(@Param('id') id: number, @Body() data: Partial<Product>): Promise<void> {
         return this.productService.updateProduct(id, data);
     }
 
@@ -37,7 +37,7 @@ export class ProductsController {
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id')
     @Roles('admin')
-    async deleteUser(@Param('id') id: number): Promise<void> {
+    async deleteProduct(@Param('id') id: number): Promise<void> {
         return this.productService.deleteProduct(id);
     }
 }

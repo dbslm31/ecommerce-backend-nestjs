@@ -1,28 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Category } from 'src/models/category.model';
+import { Category } from '../models/category.model';
+import { Product } from '../models/product.model';
 
 @Injectable()
-export class ProductsRepository {
-    constructor(@InjectModel(Category) private categoryModel: typeof Category) { }
+export class CategoryRepository {
+    constructor(@InjectModel(Category) private categoryModel: typeof Category, @InjectModel(Product) private productModel: typeof Product,) { }
 
 
-    async create(data: { name: string, description: string, price: number, stock: number, img_url: string, is_active: boolean }): Promise<Category> {
+    async create(data: { name: string, description: string }): Promise<Category> {
         return this.categoryModel.create(data);
     }
-
-
-    async findByEmail(email: string, options?: any): Promise<Category | null> {
-        return this.categoryModel.findOne({ where: { email }, ...options });
-    }
-
 
     async findAll(): Promise<Category[]> {
         return this.categoryModel.findAll();
     }
 
     async findOne(id: number): Promise<Category | null> {
-        return this.categoryModel.findOne({ where: { id } });
+        return this.categoryModel.findOne({ where: { id }, include: [{ model: Product }] });
     }
 
     async update(id: number, data: Partial<Category>): Promise<void> {
@@ -32,6 +27,11 @@ export class ProductsRepository {
     async delete(id: number): Promise<void> {
         const category = await this.findOne(id);
         if (category) {
+            await this.productModel.update(
+                { categoryId: null },
+                { where: { categoryId: id } },
+            );
+
             await category.destroy();
         }
     }
