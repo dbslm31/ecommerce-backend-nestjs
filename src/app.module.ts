@@ -6,6 +6,11 @@ import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { RolesModule } from './roles/roles.module';
+import { ProductsModule } from './products/products.module';
+import { Product } from './models/product.model';
+import { User } from './user/user.model';
+import { Role } from './roles/roles.model';
+
 
 
 
@@ -23,8 +28,10 @@ import { RolesModule } from './roles/roles.module';
     database: process.env.DB_NAME,
     autoLoadModels: true,
     synchronize: true,
+    models: [User, Role, Product]
+
   }),
-    UserModule, AuthModule, RolesModule],
+    UserModule, AuthModule, RolesModule, ProductsModule],
   controllers: [AppController],
   providers: [AppService],
 })
