@@ -12,6 +12,7 @@ import { User } from './user/user.model';
 import { Role } from './roles/roles.model';
 import { Category } from './models/category.model';
 import { CategoriesModule } from './categories/categories.module';
+import { OrdersModule } from './orders/orders.module';
 
 
 
@@ -33,7 +34,7 @@ import { CategoriesModule } from './categories/categories.module';
     models: [User, Role, Product, Category]
 
   }),
-    UserModule, AuthModule, RolesModule, ProductsModule, CategoriesModule],
+    UserModule, AuthModule, RolesModule, ProductsModule, CategoriesModule, OrdersModule],
   controllers: [AppController],
   providers: [AppService],
 })
