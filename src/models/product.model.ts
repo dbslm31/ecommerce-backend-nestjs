@@ -1,5 +1,5 @@
 import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
-
+import { Category } from 'src/models/category.model';
 @Table
 export class Product extends Model<Product> {
 
@@ -45,4 +45,12 @@ export class Product extends Model<Product> {
     })
     is_active: boolean;
 
+    @ForeignKey(() => Category)
+    @Column({
+        type: DataType.INTEGER,
+    })
+    categoryId: number;
+
+    @BelongsTo(() => Category)
+    category: Category;
 }

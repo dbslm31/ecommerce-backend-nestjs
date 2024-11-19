@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Product } from 'src/models/product.model';
+import { Product } from '../models/product.model';
 
 @Injectable()
 export class ProductsRepository {
@@ -10,12 +10,6 @@ export class ProductsRepository {
     async create(data: { name: string, description: string, price: number, stock: number, img_url: string, is_active: boolean }): Promise<Product> {
         return this.productModel.create(data);
     }
-
-
-    async findByEmail(email: string, options?: any): Promise<Product | null> {
-        return this.productModel.findOne({ where: { email }, ...options });
-    }
-
 
     async findAll(): Promise<Product[]> {
         return this.productModel.findAll();
