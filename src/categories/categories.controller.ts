@@ -3,7 +3,7 @@ import { Roles } from 'src/roles/roles.decorator';
 import { JwtAuthGuard } from 'src/auth/jwt.guard';
 import { RolesGuard } from 'src/roles/roles.guard';
 import { CategoryService } from './categories.service';
-import { Category } from 'src/models/category.model';
+import { Category } from '../models/category.model';
 
 @Controller('categories')
 export class CategoryController {

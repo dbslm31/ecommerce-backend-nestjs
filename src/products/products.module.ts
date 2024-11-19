@@ -5,7 +5,7 @@ import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
 import { ProductsRepository } from './products.repository';
 import { CategoriesModule } from 'src/categories/categories.module';
-import { Product } from 'src/models/product.model';
+import { Product } from '../models/product.model';
 
 @Module({
   imports: [

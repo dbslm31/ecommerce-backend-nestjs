@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import * as bcrypt from 'bcrypt';
-import { Product } from 'src/models/product.model';
+import { Product } from '../models/product.model';
 import { ProductsRepository } from './products.repository';
 
 @Injectable()

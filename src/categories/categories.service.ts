@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Category } from 'src/models/category.model';
+import { Category } from '../models/category.model';
 import { CategoryRepository } from './categories.repository';
 
 @Injectable()

@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Put, Patch, Delete, Body, Param, UseGuards } from '@nestjs/common';
 import { ProductsService } from './products.service';
-import { Product } from 'src/models/product.model';
+import { Product } from '../models/product.model';
 import { JwtAuthGuard } from 'src/auth/jwt.guard';
 import { RolesGuard } from 'src/roles/roles.guard';
 import { Roles } from 'src/roles/roles.decorator';
