@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Category } from '../models/category.model';
+import { Category } from 'src/models/category.model';
 import { CategoryRepository } from './categories.repository';
 
 @Injectable()
@@ -8,11 +8,11 @@ export class CategoryService {
 
     async createCategory(name: string, description: string): Promise<Category> {
         try {
-            const newProduct = await this.categoryRepository.create({
+            const newCategory = await this.categoryRepository.create({
                 name,
                 description
             });
-            return newProduct;
+            return newCategory;
         } catch (error) {
             console.error('Error while creating new category:', error);
             throw new Error('Impossible to create new category');
@@ -22,8 +22,8 @@ export class CategoryService {
 
     async findAll(): Promise<Category[]> {
         try {
-            const products = await this.categoryRepository.findAll();
-            return products;
+            const categories = await this.categoryRepository.findAll();
+            return categories;
         } catch (error) {
             console.error('Error while fetching all categories:', error);
             throw new Error('Impossible to fetch all categories');
@@ -34,13 +34,17 @@ export class CategoryService {
 
     async findOne(id: number): Promise<Category | null> {
         try {
-            const product = await this.categoryRepository.findOne(id);
+            const category = await this.categoryRepository.findOne(id);
 
-            if (!product) {
+            if (!category) {
                 throw new NotFoundException(`Category  with id ${id} not found`);
             }
 
-            return product;
+            if (category.products && category.products.length === 0) {
+                console.log('No products linked to this category');
+            }
+
+            return category;
         } catch (error) {
             console.error(`Error while fetching category with id ${id}:`, error);
             throw new Error(`Impossible to fetch category with id ${id}`);

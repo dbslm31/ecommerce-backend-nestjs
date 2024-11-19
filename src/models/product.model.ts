@@ -1,5 +1,5 @@
 import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
-import { Category } from './category.model';
+import { Category } from 'src/models/category.model';
 @Table
 export class Product extends Model<Product> {
 
