@@ -19,6 +19,13 @@ export class Order extends Model<Order> {
     })
     id: number;
 
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+        defaultValue: () => `ORD-${Math.floor(100000 + Math.random() * 900000)}`,
+    })
+    order_num: string;
+
     @ForeignKey(() => User)
     @Column({
         type: DataType.INTEGER,

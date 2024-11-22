@@ -28,6 +28,14 @@ export class OrderRepository {
         });
     }
 
+    async findByUserId(userId: number): Promise<Order[]> {
+        return this.orderModel.findAll({
+            where: { userId },
+            include: [{ model: User, attributes: ['id', 'name', 'email'] }],
+        });
+    }
+
+
 
     async findAll(): Promise<Order[]> {
         return this.orderModel.findAll({

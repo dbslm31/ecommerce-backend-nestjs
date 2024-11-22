@@ -1,18 +1,34 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { OrdersService } from './orders.service';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { OrderRepository } from './orders.repository';
+import { Order } from 'src/models/orders.model';
 
-describe('OrdersService', () => {
-  let service: OrdersService;
+@Injectable()
+export class OrderService {
+  constructor(private readonly orderRepository: OrderRepository) { }
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [OrdersService],
-    }).compile();
+  async createOrder(orderData: Partial<Order>, userId: number): Promise<Order> {
+    return this.orderRepository.create(orderData, userId);
+  }
 
-    service = module.get<OrdersService>(OrdersService);
-  });
+  async getOrderById(orderId: number): Promise<Order> {
+    const order = await this.orderRepository.findById(orderId);
+    if (!order) {
+      throw new NotFoundException(`Order with ID ${orderId} not found.`);
+    }
+    return order;
+  }
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
-});
+  async getAllOrders(): Promise<Order[]> {
+    return this.orderRepository.findAll();
+  }
+
+  async updateOrder(orderId: number, updateData: Partial<Order>): Promise<void> {
+    const order = await this.getOrderById(orderId);
+    await this.orderRepository.update(order.id, updateData);
+  }
+
+  async deleteOrder(orderId: number): Promise<void> {
+    const order = await this.getOrderById(orderId);
+    await this.orderRepository.delete(order.id);
+  }
+}
